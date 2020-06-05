@@ -1,10 +1,32 @@
-import 'package:finalexam/Helper/ImagePath.dart';
-import 'package:finalexam/Test/AppHome.dart';
-import 'package:finalexam/example.dart';
+import 'package:finalexam/AppHome.dart';
 import 'package:flutter/material.dart';
-import  'package:sphere_bottom_navigation_bar/sphere_bottom_navigation_bar.dart';
+import 'DetailPage.dart';
 
-import 'HomePage.dart';
 
-void main() => runApp(AppHome());
+
+void main() => runApp(DetailPage());
+
+
+class Login extends StatefulWidget{
+  @override
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    return _Login ();
+  }
+
+}
+
+class _Login extends State<Login>{
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return Scaffold(
+      body: Stack(
+        children: <Widget>[
+
+        ],
+      ),
+    );
+  }
+}
 
