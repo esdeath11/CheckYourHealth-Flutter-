@@ -14,7 +14,7 @@ class ImagePath extends StatelessWidget{
       ),
       alignment: Alignment.topCenter,
       decoration: BoxDecoration(
-        color: Color.fromRGBO(74, 126, 250,1),
+
       ),
       child: Image.asset(
         _assetPath,
