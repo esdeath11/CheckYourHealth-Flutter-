@@ -1,3 +1,4 @@
+import 'package:finalexam/Controller/DetailController.dart';
 import 'package:finalexam/Helper/ImagePath.dart';
 import 'package:flutter/material.dart';
 import 'package:finalexam/Helper/iconPath.dart';
@@ -7,7 +8,7 @@ class AppHome extends StatefulWidget{
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return _appHome ();
+    return _appHome();
   }
 
 }
@@ -72,7 +73,7 @@ class _myHomeDashboard extends State<MyDashboard>{
                           Positioned(
                             top: 28,
                             left: 20,
-                            child: Text("Aurel", style: TextStyle(fontSize: 15),),
+                            child: Text(DetailController().anonName, style: TextStyle(fontSize: 15),),
                           ),
                           Positioned(
                             top: 70,
