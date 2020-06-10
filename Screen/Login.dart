@@ -1,6 +1,6 @@
 import 'package:provider/provider.dart';
 import 'package:finalexam/AppHome.dart';
-import 'package:finalexam/Controller/Auth.dart';
+import 'package:finalexam/Screen/Service/Auth.dart';
 import 'package:finalexam/Helper/ImagePath.dart';
 import 'package:flutter/material.dart';
 import 'package:finalexam/Model/users.dart';
@@ -29,6 +29,8 @@ class _Login extends State<Login>{
   final AuthService _auth = AuthService();
   String email = '';
   String password = '';
+  String error = '';
+  final _textKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -119,51 +121,62 @@ class _Login extends State<Login>{
                     child: Text("Email",style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),),
                   ),
                   Positioned(
-                    top: 490,
-                    left: 20,
-                    width: 302,
-                    height: 36,
-                    child:
-                    TextField(
-                      onChanged: (val){
-                        setState(() => email = val);
-                      },
-                      decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(45)
-                          )
-                      ),
-                    ),
-                  ),
-                  Positioned(
                       top: 550,
                       left: 20,
                       child: Text("Password", style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),)),
+
                   Positioned(
-                    top: 580,
-                    width: 302,
-                    height: 36,
-                    left: 20,
-                    child: TextField(
-                      onChanged: (val){
-                        setState(() => password = val);
-                      },
-                      obscureText: true,
-                      decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(45)
-                          )
-                      ),
-                    ),),
+                      child: Container(
+                        width: 340,
+                        padding: EdgeInsets.only(top: 460, left: 20),
+                        child: Form(
+                          key: _textKey,
+                          child: Column(
+                            children: <Widget>[
+                              SizedBox(height: 20.0),
+                              TextFormField(
+                                  validator: (val) => val.isEmpty ? 'enter an email':null,
+                                  onChanged: (val) {
+                                    setState(() => email = val);
+                                  },
+                                  decoration: InputDecoration(
+                                      border: OutlineInputBorder(
+                                          borderRadius: BorderRadius.circular(45)
+                                      )
+                                  )
+                              ),
+                              SizedBox(height: 30.0),
+                              TextFormField(
+                                validator: (val) => val.length < 6 ? 'enter a password + 6 chars long':null,
+                                obscureText: true,
+                                decoration: InputDecoration(
+                                    border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(45)
+                                    )
+                                ),
+                                onChanged: (val) {
+                                  setState(() => password = val);
+                                },
+                              ),
+                            ],
+                          ),
+                        ),
+                      )
+                  ),
+
                   Positioned(
                       width: 95,
                       height: 38,
                       left: 220,
                       top: 650,
                       child: RaisedButton(
-                        onPressed: (){
-                          print(email);
-                          print(password);
+                        onPressed: () async{
+                          if(_textKey.currentState.validate()){
+                            dynamic result = await _auth.signInWithEmailAndPassword(email, password);
+                            if(result == null){
+                              setState(()=> error = 'PLS dont use Brute Force');
+                            }
+                          };
                         },
                         color: Color.fromRGBO(227, 113, 119, 1) ,
                         shape: RoundedRectangleBorder(
@@ -172,27 +185,9 @@ class _Login extends State<Login>{
                         child: Text("LOGIN",style: TextStyle(color: Colors.white),),
                       )),
                   Positioned(
-                      left: 30,
-                      width: 95,
-                      height: 38,
                       top: 650,
-                      child: RaisedButton(
-                        onPressed: () async{
-                          dynamic result = await _auth.signInAnon();
-                          if(result == null){
-                            print("error signing in");
-                          }else{
-                            print("signed in");
-                            print(result.uid);
-                            Navigator.pushNamed(context, "/home");
-                          }
-                        },
-                        color: Colors.grey[800] ,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(45)
-                        ),
-                        child: Text("Anonym",style: TextStyle(color: Colors.white),),
-                      )),
+                      left: 20,
+                      child: Text(error, style: TextStyle(color: Colors.red),)),
                   Positioned(
                       top: 750,
                       left: 33,

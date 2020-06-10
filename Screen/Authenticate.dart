@@ -1,5 +1,6 @@
-import 'package:finalexam/Screen/Service/Login.dart';
-import 'package:finalexam/Screen/Service/Register.dart';
+import 'package:finalexam/QuestionPage.dart';
+import 'package:finalexam/Screen/Login.dart';
+import 'package:finalexam/Screen/Register.dart';
 import 'package:flutter/material.dart';
 
 
@@ -10,9 +11,14 @@ class Authenticate extends StatefulWidget {
 
 class _AuthenticateState extends State<Authenticate> {
 
-  bool showSignIn = false;
+  bool showSignIn = true;
+  bool showpage=true;
   void toggleView(){
     setState(() => showSignIn = !showSignIn);
+  }
+
+  void changeThis(){
+    showpage = !showpage;
   }
 
   @override
@@ -20,8 +26,12 @@ class _AuthenticateState extends State<Authenticate> {
 
     if(showSignIn){
       return Login(toggleView: toggleView,);
-    }else{
+    }else if(!showSignIn){
       return Register(toggleView: toggleView);
+    }else if(showpage){
+      return QuestPage();
+    }else if(!showpage){
+
     }
 
   }

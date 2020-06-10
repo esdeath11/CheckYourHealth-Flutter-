@@ -3,27 +3,16 @@ import 'package:finalexam/Helper/ImagePath.dart';
 import 'package:flutter/material.dart';
 import 'package:finalexam/Helper/iconPath.dart';
 
+import 'Screen/Service/Auth.dart';
 
-class AppHome extends StatefulWidget{
-  @override
-  State<StatefulWidget> createState() {
-    // TODO: implement createState
-    return _appHome();
-  }
 
-}
-
-class _appHome extends State<AppHome>{
-  @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    return MaterialApp(
-      home: MyDashboard(),
-    );
-  }
-}
 
 class MyDashboard extends StatefulWidget{
+
+  final Function changeThis;
+
+  MyDashboard({this.changeThis});
+
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
@@ -32,6 +21,9 @@ class MyDashboard extends StatefulWidget{
 }
 
 class _myHomeDashboard extends State<MyDashboard>{
+
+  final AuthService _auth = AuthService();
+  static int page;
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -89,8 +81,8 @@ class _myHomeDashboard extends State<MyDashboard>{
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: <Widget>[
                                   GestureDetector(
-                                    onTap: (){
-                                      print('checked');
+                                    onTap: ()async {
+
                                     },
                                     child:  Container(
                                         width: 100,
@@ -123,6 +115,7 @@ class _myHomeDashboard extends State<MyDashboard>{
                                   ),
                                   GestureDetector(
                                     onTap: (){
+                                      Navigator.pushNamed(context, "/second");
                                       print('checked 2');
                                     },
                                     child:  Container(
@@ -310,12 +303,12 @@ class _myHomeDashboard extends State<MyDashboard>{
                                         ),
                                     ),
                                     GestureDetector(
-                                        onTap: (){
-                                          print('botbar settings');
+                                        onTap: () async{
+                                          await _auth.signOut();
                                         },
                                         child: Container(
 
-                                          child: IconPath("Assets/settings.png"),
+                                          child: IconPath("Assets/power.png"),
                                         ),
                                     )
 

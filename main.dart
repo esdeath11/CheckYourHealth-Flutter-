@@ -1,15 +1,17 @@
-import 'package:finalexam/Screen/Service/Register.dart';
+
+import 'package:finalexam/DetailPage.dart';
+import 'package:finalexam/QuestionPage.dart';
+import 'package:finalexam/Screen/Register.dart';
+import 'package:finalexam/SecondQuestion.dart';
 import 'package:provider/provider.dart';
 import 'package:finalexam/AppHome.dart';
-import 'package:finalexam/Controller/Auth.dart';
+import 'package:finalexam/Screen/Service/Auth.dart';
 import 'package:finalexam/Helper/ImagePath.dart';
 import 'package:flutter/material.dart';
-import 'DetailPage.dart';
-import 'QuestionPage.dart';
-import 'SecondQuestion.dart';
 import 'package:finalexam/Model/users.dart';
 
 import 'Screen/Wrapper.dart';
+
 
 
 void main() {
@@ -22,12 +24,10 @@ void main() {
       // When navigating to the "/" route, build the FirstScreen widget.
       '/': (context) => MyApp(),
       // When navigating to the "/second" route, build the SecondScreen widget.
-      '/home': (context) => AppHome(),
-      '/quest' : (context) => QuestPage(),
-      '/quest1': (context) => SecondQuestion(),
-      '/detail': (context) => DetailPage(),
-      '/register': (context) => Register(),
-
+      '/second': (context) => QuestPage(),
+      '/third': (context) => SecondQuestion(),
+      '/forth':(context)=>DetailPage(),
+      '/fifth':(context)=>MyDashboard(),
     },
   ));
 }
@@ -40,10 +40,8 @@ class MyApp extends StatelessWidget{
     // TODO: implement build
     return StreamProvider<User>.value(
         value: AuthService().user,
-       child: MaterialApp(
-         home: Wrapper(),
-       ),
-    );
+       child: Wrapper(),
+       );
   }
 
 }

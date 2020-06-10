@@ -1,4 +1,4 @@
-import 'package:finalexam/Controller/Auth.dart';
+import 'package:finalexam/Screen/Service/Auth.dart';
 import 'package:finalexam/Helper/iconPath.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -125,11 +125,9 @@ class _RegisterState extends State<Register> {
                 left: 125,
                 height: 38,
                 child: RaisedButton(
-                  onPressed: (){
+                  onPressed: () async{
                     if(_textKey.currentState.validate()){
-                      print(email);
-                      print(email);
-                      dynamic result = _auth.registerWithEmailPassword(email,password);
+                      dynamic result = _auth.registerWithEmailAndPassword(email,password);
                       if(result == null){
                         setState(()=> error = 'use a valid email or password please');
                       }
@@ -158,7 +156,8 @@ class _RegisterState extends State<Register> {
 
                     )
                   ],
-                ))
+                )),
+
           ],
         )
       )

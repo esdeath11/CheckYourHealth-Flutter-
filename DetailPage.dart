@@ -26,14 +26,11 @@ class _detailPage extends State<DetailPage>{
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return MaterialApp(
-      theme: ThemeData(
-        canvasColor: Color.fromRGBO(74, 126, 250,1),
-      ),
-      home: Scaffold(
-        body: ListView(
-          children: <Widget>[
-            Container(
+    return Scaffold(
+      backgroundColor: Color.fromRGBO(74, 126, 250,1),
+      body: ListView(
+        children: <Widget>[
+          Container(
               width: 400,
               height: 800,
               child: Stack(
@@ -143,7 +140,7 @@ class _detailPage extends State<DetailPage>{
                                       onTap: (){
                                         print('selesai');
                                         setState(() {
-                                          AppHome();
+
                                         });
                                       },
                                       child: Container(
@@ -155,7 +152,7 @@ class _detailPage extends State<DetailPage>{
                                             color: Color.fromRGBO(74, 167, 187, 1)
                                         ),
                                         child: FlatButton(onPressed: (){
-                                          Navigator.pushNamed(context, "/second");
+                                          Navigator.pushNamed(context, "/");
                                         }, child: Text("SELESAI", style: TextStyle(color: Colors.white ,fontSize: 11))),
                                       ),
                                     )
@@ -171,10 +168,9 @@ class _detailPage extends State<DetailPage>{
                   ),
                 ],
               )
-            )
+          )
 
-          ],
-        ),
+        ],
       ),
     );
   }
